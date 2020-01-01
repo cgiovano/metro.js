@@ -1,0 +1,107 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 14pt;
+    background-color: #2e2e2e;
+    color: #ececec;
+    display: grid;
+}  
+
+button {
+    background-color: #535353;
+    border: none;
+    color: #ececec;
+    border-radius: 3px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #383838;
+    color: #797979;
+}
+
+input, input:active, input:focus, 
+input[type="range"]:active, input[type="range"]:focus, 
+input[type="button"]:active, input[type="button"]:focus {
+    outline: 0;
+    outline-style:none;
+    outline-width:0;
+}
+
+button::-moz-focus-inner,
+input[type="range"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner {
+    border: none;
+}
+
+/*Custom input range track*/
+input[type=range] {
+    background: none;
+    width: 100%;
+    padding: 10px;
+}
+
+/*Webkit (Safari & Opera) / Blink (Chromium/Chrome)*/
+input[type=range]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: #eeeeee;
+    border: none;
+}
+
+/*Microsoft's EDGE & IE*/
+input[type=range]::-ms-track {
+    height: 2px;
+    background: #eeeeee;
+    border: none;
+}
+
+/*Gecko (Mozilla Firefox)*/
+input[type=range]::-moz-range-track {
+    height: 2px;
+    background: #5a5a5a;
+    border: none;
+}
+
+/*=-----------------*/
+input[type='range']::-moz-focus-outer { 
+    border: 0;
+}
+
+/*Custom input range thumb*/
+
+/*WebKit(Safari & Opera) / blink (Chromium/Chrome)*/
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-style: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+/*Microsoft's EDGE & IE*/
+input[type=range]::-ms-thumb {
+    appearance: none;
+    border-style: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+/*Gecko (Mozilla Firefox)*/
+input[type=range]::-moz-range-thumb {
+    appearance: none;
+    border-style: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}

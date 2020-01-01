@@ -1,0 +1,61 @@
+.flex-column {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  height: 33%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.container-3 {
+  width: 33%;
+  margin: auto auto;
+}
+
+.sub, .add, .show-value {
+  width: 40px;
+  height: 40px;
+}
+
+.show-value {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.common-ui-text {
+  padding: 0 10px;
+  font-size: 11pt;
+}
+
+#main-app {
+  width: 80%;
+  margin: auto auto;
+}
+
+#beats-per-minute-display {
+  font-size: 25pt;
+}
+
+#bpm-text, #beats-per-minute-display {
+  text-align: center;
+}
+
+#tempo-marking-display {
+  font-style: italic;
+  text-align: right;
+  padding-right: 10px;
+}
+
+#toggle-play {
+  width: 80px;
+  height: 40px;
+  margin: auto;
+}
+
+#1, #2, #3 {
+  margin: auto auto;
+}
