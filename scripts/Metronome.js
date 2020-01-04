@@ -1,54 +1,76 @@
-class Metronome {
+class metronome {
+    /**
+     * Creates a new metronome.
+     * @param {Number} beatsPerMinute The value of beats per minute to be played.
+     * @param {Number} beatsPerBar The value of beats that one bar should have.
+     * @param {Number} beatUnit The rhythm figure that will represent the beat. The values must be 1, 2, 4, 8, 16, 32 or 64.
+     */
     constructor(beatsPerMinute, beatsPerBar, beatUnit) {
-        const urlList = ['./assets/beep-one.wav', './assets/beep-two.wav'];
+        const _urlList = ['./assets/beep-one.wav', './assets/beep-two.wav'];
 
         this._beatUnit = beatUnit;
         this._beatsPerBar = beatsPerBar;
         this._beatsPerMinute = beatsPerMinute;
 
-        this.isRunning = false;
-        this.counter = 1;
-        this.audioContext = new AudioContext();
-        this.bufferSourceNode = undefined;
+        this._isRunning = false;
+        this._audioContext = new AudioContext();
+        this._bufferSourceNode = undefined;
 
-        let audioDecoder = new AudioDecoder(this.audioContext, urlList);
-        this.arrayBuffer = audioDecoder.decodedAudioDataList;
+        let _audioDecoder = new AudioDecoder(this._audioContext, _urlList);
+        this._arrayBuffer = _audioDecoder.decodedAudioDataList;
     }
+    
     // GETTERS
-    get currentState() {
-        return (this.isRunning);
+
+    /**
+     * Returns the current metronome state.
+     */
+    get isRunning() {
+        return (this._isRunning);
     }
 
+    /**
+     * Returns the beats per minute.
+     */
     get beatsPerMinute() {
         return (this._beatsPerMinute);
     }
 
+    /**
+     * Returns the beats per bar.
+     */
     get beatsPerBar() {
         return (this._beatsPerBar);
     }
 
+    /**
+     * Returns the beat unit.
+     */
     get beatUnit() {
         return (this._beatUnit);
     }
 
     //SETTERS
+
     /**
-     * @param {Number} "new beatsPerMinute value"
+     * Sets the new beats per minute value.
+     * @param {Number} beatsPerMinute
      */
     set beatsPerMinute(newBeatsPerMinuteValue) {
         this._beatsPerMinute = newBeatsPerMinuteValue;
     }
 
     /**
-     * @param {Number} "new beatsPerBar value"
+     * Sets the new beats per bar value.
+     * @param {Number} beatsPerBar
      */
     set beatsPerBar(newBeatsPerBarValue) {
         this._beatsPerBar = newBeatsPerBarValue;
     }
 
     /**
-     * Set the new value for beat interval
-     * @param {Number} newBeatUnitValue new value for BeatUnit
+     * Sets the new value for beat interval.
+     * @param {Number} newBeatUnitValue
      */
     set beatUnit(newBeatUnitValue) {
         this._beatUnit = newBeatUnitValue;
@@ -57,45 +79,46 @@ class Metronome {
     /**
      * Start the metronome main function.
      */
-    task() {
+    start() {
         const m = this;
+        let counter = 1;
         let t;
 
-        function start() {
-            m.bufferSourceNode = m.audioContext.createBufferSource();
+        function run() {
+            m._bufferSourceNode = m._audioContext.createBufferSource();
             
-            if (m.counter == 1) {
-                m.bufferSourceNode.buffer = m.arrayBuffer[0];
+            if (counter == 1) {
+                m._bufferSourceNode.buffer = m._arrayBuffer[0];
     
-                if (m.counter == m._beatsPerBar)
-                    m.counter = 0;
+                if (counter == m._beatsPerBar)
+                    counter = 0;
             }
             else {
-                m.bufferSourceNode.buffer = m.arrayBuffer[1];
+                m._bufferSourceNode.buffer = m._arrayBuffer[1];
     
-                if (m.counter == m._beatsPerBar)
-                    m.counter = 0;
+                if (counter == m._beatsPerBar)
+                    counter = 0;
             }
     
-            m.bufferSourceNode.connect(m.audioContext.destination);
-            m.bufferSourceNode.start();
-            m.counter++;
+            m._bufferSourceNode.connect(m._audioContext.destination);
+            m._bufferSourceNode.start();
+            counter++;
 
-            if (m.isRunning) {
-                t = setTimeout(start, (60 / (m._beatsPerMinute * (m._beatUnit / 4))) * 1000);
+            if (m._isRunning) {
+                t = setTimeout(run, (60 / (m._beatsPerMinute * (m._beatUnit / 4))) * 1000);
                 return;
             }
             else {
-                m.bufferSourceNode.stop();
-                m.bufferSourceNode.disconnect(m.audioContext.destination);
-                m.counter = 1;
+                m._bufferSourceNode.stop();
+                m._bufferSourceNode.disconnect(m._audioContext.destination);
+                counter = 1;
                 clearTimeout(t);
                 return;
             }
         }
 
-        m.isRunning ? m.isRunning = false : m.isRunning = true;
+        m._isRunning ? m._isRunning = false : m._isRunning = true;
 
-        start();
+        run();
     }
 }

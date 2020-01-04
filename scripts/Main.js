@@ -18,12 +18,10 @@ let beatUnitArray = [1, 2, 4, 8, 16, 32, 64];
 let beatsPerBarCounter = defaultValues[1];
 let beatUnitArrayPos = defaultValues[2];
 
-//var metronome = new Metronome(defaultValues[0], defaultValues[1], beatUnitArray[defaultValues[2]]);
-
 document.addEventListener('DOMContentLoaded', init(), false);
 
 function init() {
-    metronome = new Metronome(defaultValues[0], defaultValues[1], beatUnitArray[defaultValues[2]]);
+    metronome = new metronome(defaultValues[0], defaultValues[1], beatUnitArray[defaultValues[2]]);
 
     beatsPerMinute_range.value = defaultValues[0];
     beatsPerMinute_display.innerText = defaultValues[0].toString();
@@ -88,9 +86,9 @@ function bpmRange_onInput() {
 }
 
 function togglePlay_onClick(){
-    metronome.task();
+    metronome.start();
 
-    if (metronome.currentState) {
+    if (metronome.isRunning) {
         togglePlay_button.innerText = 'Stop';
         togglePlay_button.style["background-color"] = "#de4040";
     }
