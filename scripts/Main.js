@@ -1,27 +1,21 @@
-
-let togglePlay_button = document.getElementById('toggle-play');
-let beatsPerMinute_range = document.getElementById('bpm-range');
-let beatsPerMinute_display = document.getElementById('beats-per-minute-display');
-let beatsPerBar_display = document.getElementById('beats-per-bar-display');
-let beatUnit_display = document.getElementById('beat-unit-display');
-let beatsPerBarSub_button = document.getElementById('beats-per-bar-sub');
-let beatsPerBarAdd_button = document.getElementById('beats-per-bar-add');
-let beatUnitSub_button = document.getElementById('beat-unit-sub');
-let beatUnitAdd_button = document.getElementById('beat-unit-add');
-let tempoMarking_display = document.getElementById('tempo-marking-display');
+const BEATS_PER_BAR_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+const BEAT_UNIT_NOTE = [1, 2, 4, 8, 16, 32, 64];
 
 let metronome = undefined;
-
+let beatsPerBarArrayPos = 3;
+let beatUnitArrayPos = 3;
 let defaultValues = [60, 4, 2]; //beatsPerMinute, beatsPerBar, beatUnitArray index respectively.
 let beatUnitArray = [1, 2, 4, 8, 16, 32, 64];
 
-let beatsPerBarCounter = defaultValues[1];
-let beatUnitArrayPos = defaultValues[2];
+let togglePlay_button = document.getElementById('toggle-play');
+let beatsPerMinute_range = document.getElementById('bpm-range');
+let tempoMarking_display = document.getElementById('tempo-marking-display');
+let beatsPerMinute_display = document.getElementById('beats-per-minute-display');
 
 document.addEventListener('DOMContentLoaded', init(), false);
 
 function init() {
-    metronome = new metronome(defaultValues[0], defaultValues[1], beatUnitArray[defaultValues[2]]);
+    metronome = new Metronome(defaultValues[0], defaultValues[1], beatUnitArray[defaultValues[2]]);
 
     beatsPerMinute_range.value = defaultValues[0];
     beatsPerMinute_display.innerText = defaultValues[0].toString();
@@ -32,47 +26,31 @@ function init() {
 }
 
 function beatsPerBarSub_onClick() {
-    beatsPerBarCounter--;
-    beatsPerBar_display.innerText = beatsPerBarCounter;
-    metronome.beatsPerBar = beatsPerBarCounter;
+    beatsPerBarArrayPos--;
+    metronome.beatsPerBar = BEATS_PER_BAR_ARRAY[beatsPerBarArrayPos];
 
-    if (beatsPerBarCounter == 1)
-        beatsPerBarSub_button.disabled = true;
-    else if (beatsPerBarCounter < 30 && beatsPerBarAdd_button.disabled == true)
-        beatsPerBarAdd_button.disabled = false;
+    beatsPerBarSub_watcher(beatsPerBarArrayPos);
 }
 
 function beatsPerBarAdd_onClick() {
-    beatsPerBarCounter++;
-    beatsPerBar_display.innerText = beatsPerBarCounter;
-    metronome.beatsPerBar = beatsPerBarCounter;
+    beatsPerBarArrayPos++;
+    metronome.beatsPerBar = BEATS_PER_BAR_ARRAY[beatsPerBarArrayPos];
 
-    if (beatsPerBarCounter == 30)
-        beatsPerBarAdd_button.disabled = true;
-    else if (beatsPerBarCounter > 1 && beatsPerBarSub_button.disabled == true)
-        beatsPerBarSub_button.disabled = false;
+    beatsPerBarAdd_watcher(beatsPerBarArrayPos);
 }
 
 function beatUnitSub_onClick() {
     beatUnitArrayPos--;
-    beatUnit_display.innerText = beatUnitArray[beatUnitArrayPos].toString();
     metronome.beatUnit = beatUnitArray[beatUnitArrayPos];
 
-    if (beatUnitArrayPos == 0)
-        beatUnitSub_button.disabled = true;
-    else if (beatUnitArrayPos < beatUnitArray.length - 1 && beatUnitAdd_button.disabled == true)
-        beatUnitAdd_button.disabled = false;
+    beatUnitSub_watcher(beatUnitArrayPos);
 }
 
 function beatUnitAdd_onClick() {
     beatUnitArrayPos++;
-    beatUnit_display.innerText = beatUnitArray[beatUnitArrayPos].toString();
     metronome.beatUnit = beatUnitArray[beatUnitArrayPos];
 
-    if (beatUnitArrayPos == beatUnitArray.length - 1)
-        beatUnitAdd_button.disabled = true;
-    else if (beatUnitArrayPos > 0 && beatUnitSub_button.disabled == true)
-        beatUnitSub_button.disabled = false;
+    beatUnitAdd_watcher(beatUnitArrayPos);
 }
 
 function bpmRange_onInput() {
@@ -87,13 +65,5 @@ function bpmRange_onInput() {
 
 function togglePlay_onClick(){
     metronome.start();
-
-    if (metronome.isRunning) {
-        togglePlay_button.innerText = 'Stop';
-        togglePlay_button.style["background-color"] = "#de4040";
-    }
-    else {
-        togglePlay_button.innerText = 'Start';
-        togglePlay_button.style["background-color"] = "#32a852";
-    }
+    toggleButtonStyle(metronome.isRunning);
 }

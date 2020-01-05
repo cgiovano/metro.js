@@ -17,10 +17,7 @@ const TEMPO_MARK = {
     PRESTISSIMO:           {MIN: 200, MAX: 220, NAME: "Prestíssimo"} 
 }
 
-/**
- * Returns a string of the actual tempo mark
- * @param {Number} beatsPerMinute the value for beats per minute
- */
+// returns the tempo mark
 function getTempoMark(beatsPerMinute) {
     switch(true) {
         case (isBetween(beatsPerMinute, TEMPO_MARK.GRAVE.MIN, TEMPO_MARK.GRAVE.MAX)):
@@ -77,12 +74,7 @@ function getTempoMark(beatsPerMinute) {
     }
 }
 
-/**
- * Checks if a specific number is between a range of values (must specifies the start value and the final value).
- * @param {Number} currentValue the actual value to be checked.
- * @param {Number} startValue the start value of the range.
- * @param {Number} finalValue the final value of the range.
- */
+//Checks if a specific number is between a range of values (must specifies the start value and the final value).
 function isBetween(currentValue, startValue, finalValue) {
     if (currentValue >= startValue && currentValue < finalValue)
         return (true);

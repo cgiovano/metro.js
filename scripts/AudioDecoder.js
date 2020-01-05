@@ -1,9 +1,5 @@
+// Decodes the audio from a file. The url of the file must be specified and the current audio context.
 class AudioDecoder {
-    /**
-     * Decode the audio from files specified to audio buffer.
-     * @param {AudioContext} audioContext The current audio context to be used.
-     * @param {Array} urlList The relative path of the audio files to be decoded.
-     */
     constructor (audioContext, urlList) {
         this._audioContext = audioContext;
         this._urlList = urlList;
@@ -12,11 +8,12 @@ class AudioDecoder {
         this.decodeAudio();
     }
 
-
+    // Returns the decoded audio data as an array.
     get decodedAudioDataList() {
         return (this._decodedAudioDataList);
     }
 
+    // Read and Decode
     decodeAudio() {
         try {
             for (let i = 0; i < this._urlList.length; i++) {
@@ -29,7 +26,6 @@ class AudioDecoder {
                 request.send();
             }
 
-            //DEBUG
             console.log("Sound sources were loaded succesfully!");
         }
         catch (error) {
