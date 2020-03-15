@@ -31,7 +31,7 @@
   font-size: 11pt;
 }
 
-#main-app {
+#metrojs {
   width: 80%;
   margin: auto auto;
 }
@@ -54,8 +54,27 @@
   width: 80px;
   height: 40px;
   margin: auto;
+  transition: 0.5s background-color;
 }
 
 #1, #2, #3 {
   margin: auto auto;
+}
+
+.tab {
+  margin: 0 auto;
+  display: inline;
+  margin-top: 20px;
+}
+
+.tablinks {
+  width: 150px;
+  height: 75px;
+  padding: 0;
+  background-color: #535353;
+  border: none;
+}
+
+.tablinks:hover {
+  background-color: deeppink;
 }

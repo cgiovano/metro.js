@@ -30,20 +30,6 @@ button:disabled {
     color: #797979;
 }
 
-input, input:active, input:focus, 
-input[type="range"]:active, input[type="range"]:focus, 
-input[type="button"]:active, input[type="button"]:focus {
-    outline: 0;
-    outline-style:none;
-    outline-width:0;
-}
-
-button::-moz-focus-inner,
-input[type="range"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner {
-    border: none;
-}
-
 /*Custom input range track*/
 input[type=range] {
     background: none;
@@ -72,9 +58,23 @@ input[type=range]::-moz-range-track {
     border: none;
 }
 
-/*=-----------------*/
+/*-----------------*/
 input[type='range']::-moz-focus-outer { 
     border: 0;
+}
+
+input, input:active, input:focus, 
+input[type="range"]:active, input[type="range"]:focus, 
+input[type="button"]:active, input[type="button"]:focus {
+    outline: 0;
+    outline-style:none;
+    outline-width:0;
+}
+
+button::-moz-focus-inner,
+input[type="range"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner {
+    border: none;
 }
 
 /*Custom input range thumb*/
