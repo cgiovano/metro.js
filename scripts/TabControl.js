@@ -6,6 +6,4 @@ function opentab(tabname) {
     }
 
     document.getElementById(tabname).style.display = 'block';
-
-    console.log("hello" + tabname);
 }

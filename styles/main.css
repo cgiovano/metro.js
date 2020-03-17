@@ -61,22 +61,63 @@
   margin: auto auto;
 }
 
+/*header tab style*/
 
+header {
+  height: 75px;
+  width: 100%;
+  background-color: #474747;
+}
+
+.tabcontent {
+  grid-row: 70%;
+}
 
 .tab {
+  width: 350px;
   margin: 0 auto;
-  display: inline;
-  margin-top: 20px;
 }
 
 .tablinks {
+  list-style: none;
+  display: inline-grid;
+  text-align: center;
   width: 150px;
   height: 75px;
-  padding: 0;
-  background-color: #535353;
-  border: none;
 }
 
 .tablinks:hover {
   background-color: deeppink;
+}
+
+li p {
+  margin: auto 0;
+  vertical-align: middle;
+}
+
+/*tunerjs*/
+
+#tunerjs {
+  width: 80%;
+  margin: auto auto;
+}
+
+.main {
+  width: min-content;
+  margin: auto;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border: white solid;
+  border-radius: 50%;
+  text-align: center;
+  display: grid;
+}
+
+.note {
+  font-size: 24pt;
+  margin: auto 0;
 }
