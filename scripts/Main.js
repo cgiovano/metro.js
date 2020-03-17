@@ -23,6 +23,8 @@ function init() {
     beatUnit_display.innerText = beatUnitArray[defaultValues[2]].toString();
     tempoMarking_display.innerText = getTempoMark(defaultValues[0]);
     togglePlay_button.style["background-color"] = "#32a852";
+
+    opentab("metrojs");
 }
 
 function beatsPerBarSub_onClick() {

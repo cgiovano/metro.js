@@ -1,4 +1,4 @@
-function hello(tabname) {
+function opentab(tabname) {
     let tabcontent = document.getElementsByClassName('tabcontent');
 
     for (let i = 0; i < tabcontent.length; i++) {

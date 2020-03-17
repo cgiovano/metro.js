@@ -11,8 +11,8 @@
 
 <body>
     <div class="tab">
-       <button class="tablinks" onclick="hello('metrojs')">hello</button>
-       <button class="tablinks" onclick="hello('tunerjs')">heheh</button>
+       <button class="tablinks" onclick="opentab('metrojs')">METRONOME</button>
+       <button class="tablinks" onclick="opentab('tunerjs')">TUNER</button>
     </div>
 
     <div id="metrojs" class="tabcontent">
@@ -43,9 +43,11 @@
                     <div class="text" id="tempo-marking-display">tempo</div>
                 </div>
             </div>
+
             <div class="flex-row" id="2">
                 <input id="bpm-range" type="range" min="20" max="220" oninput="bpmRange_onInput()" />
             </div>
+
             <div class="flex-row" id="3">
                 <button id="toggle-play" onclick="togglePlay_onClick()">start</button>
             </div>
@@ -53,10 +55,26 @@
     </div>
 
     <div id="tunerjs" class="tabcontent">
-        <h1>Tuner</h1>
-        <p>This is just a test.</p>
+		<p>
+			<button onclick="this.innerText = togglePlayback()">use demo audio</button>
+			<button onclick="toggleLiveInput()">use live input</button>
+			<button onclick="toggleOscillator()">use oscillator</button>
+			<!--<button onclick="updatePitch(0);">sample</button>-->
+		</p>
+
+		<div id="detector" class="vague">
+			<div class="pitch"><span id="pitch">--</span>Hz</div>
+			<div class="note"><span id="note">--</span></div>   
+			<canvas id="output" width=300 height=42></canvas>
+			<div id="detune"><span id="detune_amt">--</span><span id="flat">cents &#9837;</span><span id="sharp">cents &#9839;</span></div>
+		</div>
+
+		<!-- just used for debugging
+		<canvas id="waveform" width="512" height="256"></canvas>
+		-->
     </div>
 
+    <script src="./scripts/pitchdetect.js"></script>
     <script src="./scripts/TabControl.js"></script>
     <script src="./scripts/TempoMark.js"></script>
     <script src="./scripts/AudioDecoder.js"></script>
