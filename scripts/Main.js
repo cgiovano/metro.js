@@ -24,7 +24,7 @@ function init() {
     tempoMarking_display.innerText = getTempoMark(defaultValues[0]);
     togglePlay_button.style["background-color"] = "#32a852";
 
-    opentab("metrojs");
+    opentabFirstOpen("metrojs");
 }
 
 function beatsPerBarSub_onClick() {

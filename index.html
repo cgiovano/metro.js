@@ -12,11 +12,13 @@
 <body>
     <header>
         <ul class="tab">
-            <li class="tablinks" onclick="opentab('metrojs')">
+            <li class="tablinks active" onclick="opentab(event, 'metrojs')">
                 <p>METRONOME</p>
+                <div class="state"></div>
             </li>
-            <li class="tablinks" onclick="opentab('tunerjs')">
+            <li class="tablinks" onclick="opentab(event, 'tunerjs')">
                 <p>TUNER</p>
+                <div class="state"></div>
             </li>
         </ul>
     </header>
@@ -62,25 +64,30 @@
 
     <div id="tunerjs" class="tabcontent">
         <div class="flex-column">
-            <div class="main">
-                <div class="circle">
-                    <div class="note"><span id="note">--</span></div>
-                </div>
-                <div>
-                    <button onclick="toggleLiveInput()">use live input</button>
-                    <!--<button onclick="updatePitch(0);">sample</button>-->
-                </div>
-                <div id="detector" class="vague">
-                    <div class="pitch"><span id="pitch">--</span>Hz</div>
-                    
-                    <canvas id="output" width=300 height=42></canvas>
-                    <div id="detune"><span id="detune_amt">--</span><span id="flat">cents &#9837;</span><span
-                            id="sharp">cents &#9839;</span></div>
+            <div class="flex-row" id="1">
+                <div class="container-3">
+                    <div class="pitch content"><span id="pitch">--</span>Hz</div>
                 </div>
 
-                <canvas id="waveform" width="512" height="256"></canvas>
+                <div class="container-3">
+                    <div class="circle">
+                        <div class="note"><span id="note">--</span></div>
+                    </div>
+                </div>
+
+                <div class="container-3">
+                    <div id="detector" class="vague">
+                        <div id="detune">
+                            <span id="detune_amt">--</span>
+                            <span id="flat">cents &#9837;</span>
+                            <span id="sharp">cents &#9839;</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <canvas id="waveform" width="512" height="256"></canvas>
     </div>
 
     <script src="./scripts/pitchdetect.js"></script>

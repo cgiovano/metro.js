@@ -33,7 +33,7 @@
 
 #metrojs {
   width: 80%;
-  margin: auto auto;
+  margin: 0 auto;
 }
 
 #beats-per-minute-display {
@@ -64,7 +64,7 @@
 /*header tab style*/
 
 header {
-  height: 75px;
+  height: 60px;
   width: 100%;
   background-color: #474747;
 }
@@ -82,29 +82,32 @@ header {
   list-style: none;
   display: inline-grid;
   text-align: center;
+  font-size: 12pt;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 150px;
-  height: 75px;
+  height: 60px;
 }
 
 .tablinks:hover {
-  background-color: deeppink;
+  background-color: #b9b9b95e;
 }
 
 li p {
-  margin: auto 0;
+  margin: auto 0 0 0;
   vertical-align: middle;
+}
+
+.active .state {
+  height: 1.5px;
+  background-color: white;
+  margin: auto 0 0 0;
 }
 
 /*tunerjs*/
 
 #tunerjs {
   width: 80%;
-  margin: auto auto;
-}
-
-.main {
-  width: min-content;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .circle {
@@ -120,4 +123,16 @@ li p {
 .note {
   font-size: 24pt;
   margin: auto 0;
+}
+
+.main {
+  display: inline;
+}
+
+.content {
+  text-align: center;
+}
+
+#detune {
+  text-align: center;
 }
