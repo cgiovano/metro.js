@@ -15,7 +15,7 @@ function opentab(event, tabname) {
 
     switch (tabname) {
         case ("tunerjs"):
-            toggleLiveInput();
+            initTuner();
     }
 }
 
