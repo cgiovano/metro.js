@@ -26,13 +26,29 @@ function callback(stream) {
         //analyser.getByteTimeDomainData(buffer);
         let frequency = autoCorrelate(ctx.sampleRate, buffer);
         frequency = Math.floor(frequency * 100) / 100;
-        freq.innerText = frequency.toFixed(2);
+
+        if (!isNaN(frequency)) {
+            freq.innerText = frequency.toFixed(2);
+        }
+        else {
+            freq.innerText = "--";
+        }
 
         var n =  noteFromPitch(frequency);
 
-        note.innerText = noteStrings[Math.floor(n%12)];//noteStrings[n];
+        if (!isNaN(n)) {
+            note.innerText = noteStrings[Math.floor(n%12)];
+        }
+        else {
+            note.innerText = "--";
+        }
 
-        detune_amt.innerText = centsOffFromPitch(frequency, n);
+        if (!isNaN(frequency)) {
+            detune_amt.innerText = centsOffFromPitch(frequency, n);
+        }   
+        else {
+            detune_amt.innerText = "--";
+        }
 
         requestAnimationFrame(run);
     }
@@ -91,13 +107,13 @@ function getRMS(dataBuffer) {
 
 function noteFromPitch( frequency ) {
 	var noteNum = 12 * (Math.log( frequency / 440 )/Math.log(2) );
-	return Math.round( noteNum ) + 69;
+	return (Math.round( noteNum ) + 69);
 }
 
 function frequencyFromNoteNumber( note ) {
-	return 440 * Math.pow(2,(note-69)/12);
+	return (440 * Math.pow(2,(note-69)/12));
 }
 
 function centsOffFromPitch( frequency, note ) {
-	return Math.floor( 1200 * Math.log( frequency / frequencyFromNoteNumber( note ))/Math.log(2) );
+	return (Math.floor( 1200 * Math.log( frequency / frequencyFromNoteNumber( note ))/Math.log(2) ));
 }
