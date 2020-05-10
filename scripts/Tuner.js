@@ -1,6 +1,10 @@
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
 let freq = document.getElementById("pitch");
+let note = document.getElementById("note");
+let detune_amt = document.getElementById("detune_amt");
+
+var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 function initTuner() {
     navigator.getUserMedia({ video: false, audio: true }, callback, console.log);
@@ -14,14 +18,21 @@ function callback(stream) {
     mic.connect(analyser);
     
     let buffer = new Float32Array(analyser.frequencyBinCount);
+    //let buffer = new Uint8Array(analyser.frequencyBinCount);
 
     function run() {
         // Fill up the wave data.
         analyser.getFloatTimeDomainData(buffer);
+        //analyser.getByteTimeDomainData(buffer);
         let frequency = autoCorrelate(ctx.sampleRate, buffer);
         frequency = Math.floor(frequency * 100) / 100;
-
         freq.innerText = frequency.toFixed(2);
+
+        var n =  noteFromPitch(frequency);
+
+        note.innerText = noteStrings[Math.floor(n%12)];//noteStrings[n];
+
+        detune_amt.innerText = centsOffFromPitch(frequency, n);
 
         requestAnimationFrame(run);
     }
@@ -35,10 +46,10 @@ function autoCorrelate(sampleRate, dataBuffer) {
 
     let bestOffset = 0;
     let smallestDifference = Number.POSITIVE_INFINITY;
-    let rms = GetRMS(dataBuffer);
+    let rms = getRMS(dataBuffer);
 
     // Check the level of the signal. If we don't have enough signal we will return -1.
-    if (rms < 0.01) {
+    if (rms < 0.001) {
         return (-1);
     }
 
@@ -67,7 +78,7 @@ function autoCorrelate(sampleRate, dataBuffer) {
     }
 }
 
-function GetRMS(dataBuffer) {
+function getRMS(dataBuffer) {
     let rms;
 
     for (let i = 0; i < dataBuffer.length; i++)
@@ -76,4 +87,17 @@ function GetRMS(dataBuffer) {
     rms = Math.sqrt(rms / dataBuffer.length);
 
     return (rms);
+}
+
+function noteFromPitch( frequency ) {
+	var noteNum = 12 * (Math.log( frequency / 440 )/Math.log(2) );
+	return Math.round( noteNum ) + 69;
+}
+
+function frequencyFromNoteNumber( note ) {
+	return 440 * Math.pow(2,(note-69)/12);
+}
+
+function centsOffFromPitch( frequency, note ) {
+	return Math.floor( 1200 * Math.log( frequency / frequencyFromNoteNumber( note ))/Math.log(2) );
 }

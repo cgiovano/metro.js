@@ -16,6 +16,8 @@ function opentab(event, tabname) {
     switch (tabname) {
         case ("tunerjs"):
             initTuner();
+        default:
+            console.log("error");
     }
 }
 
