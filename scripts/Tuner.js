@@ -65,7 +65,7 @@ function autoCorrelate(sampleRate, dataBuffer) {
     let rms = getRMS(dataBuffer);
 
     // Check the level of the signal. If we don't have enough signal we will return -1.
-    if (rms < 0.001) {
+    if (rms < 0.1) {
         return (-1);
     }
 
