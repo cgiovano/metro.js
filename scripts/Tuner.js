@@ -3,6 +3,19 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
 let freq = document.getElementById("pitch");
 let note = document.getElementById("note");
 let detune_amt = document.getElementById("detune_amt");
+let bgCircleColor = document.getElementById("tuneCircle");
+
+function backgroundCircleColor(cents) {    
+    if (cents > -10 && cents < 10) {
+        document.getElementById("tuneCircle").style.borderColor = "green";
+    }
+    else if (cents > -20 && cents < 20) {
+        document.getElementById("tuneCircle").style.borderColor = "yellow";
+    }
+    else if (cents < -20 || cents > 20){
+        document.getElementById("tuneCircle").style.borderColor = "red";
+    }
+}
 
 var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
@@ -45,9 +58,11 @@ function callback(stream) {
 
         if (!isNaN(frequency)) {
             detune_amt.innerText = centsOffFromPitch(frequency, n);
+            backgroundCircleColor(detune_amt.innerText);
         }   
         else {
             detune_amt.innerText = "--";
+            document.getElementById("tuneCircle").style.borderColor = "white";
         }
 
         requestAnimationFrame(run);
@@ -94,11 +109,16 @@ function autoCorrelate(sampleRate, dataBuffer) {
             }
         }
         else if (foundGoodDifference) {
+            // short-circuit - we found a good correlation, then a bad one, so we'd just be seeing copies from here.
+			// Now we need to tweak the offset - by interpolating between the values to the left and right of the
+			// best offset, and shifting it a bit.  This is complex, and HACKY in this code (happy to take PRs!) -
+			// we need to do a curve fit on correlations[] around best_offset in order to better determine precise
+			// (anti-aliased) offset.
             var antiAliasedDifference = lerp(differences[bestOffset - 1], differences[bestOffset + 1], differences[bestOffset]);
 
-            let res = sampleRate / (bestOffset + (antiAliasedDifference * 12));  //12 is the number of chromatic notes;
+            let res = sampleRate / (bestOffset - (antiAliasedDifference));  //12 is the number of chromatic notes;
 
-            if (isNaN(res) == false) {
+            if (!isNaN(res)) {
                 return(res);
             }
         }
