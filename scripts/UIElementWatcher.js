@@ -44,10 +44,10 @@ function beatUnitAdd_watcher(arrayPos) {
 function toggleButtonStyle(isRunning) {
     if (metronome.isRunning) {
         togglePlay_button.innerText = 'Stop';
-        togglePlay_button.style["background-color"] = "#de4040";
+        togglePlay_button.className = "btn btn-danger";
     }
     else {
         togglePlay_button.innerText = 'Start';
-        togglePlay_button.style["background-color"] = "#32a852";
+        togglePlay_button.className = "btn btn-success";
     }
 }

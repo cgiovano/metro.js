@@ -44,7 +44,7 @@ function callback(stream) {
             freq.innerText = frequency.toFixed(2);
         }
         else {
-            freq.innerText = "--";
+            freq.innerText = "0";
         }
 
         var n =  noteFromPitch(frequency);
@@ -61,8 +61,8 @@ function callback(stream) {
             backgroundCircleColor(detune_amt.innerText);
         }   
         else {
-            detune_amt.innerText = "--";
-            document.getElementById("tuneCircle").style.borderColor = "white";
+            detune_amt.innerText = "0";
+            document.getElementById("tuneCircle").style.borderColor = "black";
         }
 
         requestAnimationFrame(run);

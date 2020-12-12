@@ -1,21 +1,3 @@
-.flex-column {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-row {
-  height: 33%;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-}
-
-.container-3 {
-  width: 33%;
-  margin: auto auto;
-}
-
 .sub, .add, .show-value {
   width: 40px;
   height: 40px;
@@ -27,13 +9,9 @@
 }
 
 .common-ui-text {
-  padding: 0 10px;
+  padding-top: 5pt;
+  padding-bottom: 5pt;
   font-size: 11pt;
-}
-
-#metrojs {
-  width: 80%;
-  margin: 0 auto;
 }
 
 #beats-per-minute-display {
@@ -61,48 +39,6 @@
   margin: auto auto;
 }
 
-/*header tab style*/
-
-header {
-  height: 60px;
-  width: 100%;
-  background-color: #474747;
-}
-
-.tabcontent {
-  grid-row: 70%;
-}
-
-.tab {
-  width: 350px;
-  margin: 0 auto;
-}
-
-.tablinks {
-  list-style: none;
-  display: inline-grid;
-  text-align: center;
-  font-size: 12pt;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width: 150px;
-  height: 60px;
-}
-
-.tablinks:hover {
-  background-color: #b9b9b95e;
-}
-
-li p {
-  margin: auto 0 0 0;
-  vertical-align: middle;
-}
-
-.active .state {
-  height: 1.5px;
-  background-color: white;
-  margin: auto 0 0 0;
-}
-
 /*tunerjs*/
 
 #tunerjs {
@@ -111,8 +47,8 @@ li p {
 }
 
 .circle {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   margin: auto;
   border: white solid;
   border-radius: 50%;

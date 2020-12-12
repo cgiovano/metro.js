@@ -5,13 +5,15 @@ function opentab(event, tabname) {
         tabcontent[i].style.display = 'none';
     }
 
-    let tablinks = document.getElementsByClassName("tablinks");
+    let tablinks = document.getElementsByClassName("nav-link");
+
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
     document.getElementById(tabname).style.display = 'block';
-    event.currentTarget.className += " active";
+    //event.currentTarget.className += " active";
+    event.currentTarget.childNodes[1].className += " active";
 
     switch (tabname) {
         case ("tunerjs"):

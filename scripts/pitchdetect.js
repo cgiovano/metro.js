@@ -267,10 +267,10 @@ function updatePitch( time ) {
 
  	if (ac == -1) {
  		detectorElem.className = "vague";
-	 	pitchElem.innerText = "--";
+	 	pitchElem.innerText = "0Hz";
 		noteElem.innerText = "-";
 		detuneElem.className = "";
-		detuneAmount.innerText = "--";
+		detuneAmount.innerText = "0";
  	} else {
 	 	detectorElem.className = "confident";
 	 	pitch = ac;
@@ -280,7 +280,7 @@ function updatePitch( time ) {
 		var detune = centsOffFromPitch( pitch, note );
 		if (detune == 0 ) {
 			detuneElem.className = "";
-			detuneAmount.innerHTML = "--";
+			detuneAmount.innerHTML = "0";
 		} else {
 			if (detune < 0)
 				detuneElem.className = "flat";
