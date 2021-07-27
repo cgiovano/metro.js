@@ -1,3 +1,4 @@
+
 button:hover {
     cursor: pointer;
 }
@@ -58,7 +59,7 @@ input[type="button"]::-moz-focus-inner {
 
 /*WebKit(Safari & Opera) / blink (Chromium/Chrome)*/
 input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
+    /*-webkit-appearance: none;*/
     border-style: none;
     height: 20px;
     width: 20px;

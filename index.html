@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./styles/ui.css" />
-    <link rel="stylesheet" href="./styles/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--<meta http-equiv="X-UA-Compatible" content="ie=edge" />-->
+    <!--<link rel="stylesheet" href="./styles/ui.css" />-->
+    <!--<link rel="stylesheet" href="./styles/main.css" />-->
     <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>-->
     <script src="./js/jquery.js" crossorigin="anonymous"></script>
     <script src="./js/bootstrap.js" crossorigin="anonymous"></script>
@@ -14,13 +15,36 @@
 </head>
 
 <style>
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+    .navbar {
+        height: 10%;
+    }
+
+    .tabcontent {
+        display: flex;
+        height: 90%;
+    }
+
+    .containter {
+        vertical-align: middle;
+    }
+
     .row {
         margin: 0;
     }
 
-    .my-auto-horizontal-center {
+    .my-auto-vertical-center {
         margin-top: auto;
         margin-bottom: auto;
+    }
+
+    .my-auto-horizontal-center {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .my-auto-bottom-align {
@@ -31,23 +55,41 @@
         width: 100%;
     }
 
-    @media (min-width: 720px) {
-        #toggle-play {
-            width: 50%;
-        }
-    }
-
     .col-md-4 {
         padding-top: 1em;
         padding-bottom: 1em;
     }
+
+    .form-range {
+        width: 100%;
+    }
+
+    .show-value {
+        margin: auto 15px;
+    }
+
+    .custom-padding {
+        padding: .5em;
+    }
+
+    .my-custom-text-align-right {
+        text-align: right;
+    }
+
+    #beats-per-minute-display {
+        font-size: xxx-large;
+    }
+
+    #tempo-marking-display {
+        font-style: italic;
+    }
 </style>
 
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light nav-fill">
         <a class="navbar-brand">Metro.js</a>
 
-        <ul class="nav nav-pills nav-fill">
+        <ul class="nav nav-pills">
             <li class="nav-item" onclick="opentab(event, 'metrojs')">
                 <a class="nav-link active" href="#">Metronome</a>
             </li>
@@ -60,41 +102,45 @@
     <div id="metrojs" class="tabcontent">
         <div class="container">
             <div class="row" id="1">
-                <div class="col-md-4 text-center">
-                    <div class="common-ui-text">beats per bar:</div>
+                <div class="col text-center">
+                    <div class="common-ui-text custom-padding">beats per bar:</div>
                     <div class="row justify-content-center" id="beats-per-bar-selection">
-                        <button type="button" class="btn btn-primary" id="beats-per-bar-sub"
+                        <button type="button" class="btn btn-light" id="beats-per-bar-sub"
                             onclick="beatsPerBarSub_onClick()">-</button>
                         <span class="show-value" id="beats-per-bar-display">1</span>
-                        <button type="button" class="btn btn-primary" class="add" id="beats-per-bar-add"
+                        <button type="button" class="btn btn-light" class="add" id="beats-per-bar-add"
                             onclick="beatsPerBarAdd_onClick()">+</button>
                     </div>
 
-                    <div class="common-ui-text">beat unit:</div>
+                    <div class="common-ui-text custom-padding">beat unit:</div>
                     <div class="row justify-content-center" id="beat-unit-selection">
-                        <button type="button" class="btn btn-primary" class="sub" id="beat-unit-sub"
+                        <button type="button" class="btn btn-light" class="sub" id="beat-unit-sub"
                             onclick="beatUnitSub_onClick()">-</button>
                         <div class="show-value" id="beat-unit-display">1</div>
-                        <button type="button" class="btn btn-primary" class="add" id="beat-unit-add"
+                        <button type="button" class="btn btn-light" class="add" id="beat-unit-add"
                             onclick="beatUnitAdd_onClick()">+</button>
                     </div>
                 </div>
 
-                <div class="col-md-4 my-auto-horizontal-center">
-                    <div class="text" id="beats-per-minute-display">234</div>
-                    <div class="text" id="bpm-text">BPM</div>
-                </div>
-
-                <div class="col-md-4 my-auto-bottom-align">
-                    <div class="text" id="tempo-marking-display">tempo</div>
+                <div class="col my-auto-vertical-center">
+                    <div class="row justify-content-center">
+                        <span class="text" id="beats-per-minute-display">234</span>
+                    </div>
+                    <div class="row justify-content-center">
+                        <span class="text" id="bpm-text">BPM</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="row-sm-4" id="2">
-                <input id="bpm-range" type="range" min="20" max="220" oninput="bpmRange_onInput()" />
+            <div class="row my-auto-bottom-align my-custom-text-align-right custom-padding">
+                <span class="text" id="tempo-marking-display">tempo</span>
             </div>
 
-            <div class="row justify-content-center" id="3">
+            <div class="row justify-content-center custom-padding" id="2">
+                <input id="bpm-range" class="form-range" type="range" min="20" max="220" oninput="bpmRange_onInput()" />
+            </div>
+
+            <div class="row justify-content-center custom-padding" id="3">
                 <button type="button" class="btn btn-success" id="toggle-play"
                     onclick="togglePlay_onClick()">start</button>
             </div>
@@ -108,13 +154,13 @@
                     <div class="pitch content"><span id="pitch">0Hz</span>Hz</div>
                 </div>
 
-                <div class="col-md-4 my-auto-horizontal-center">
+                <div class="col my-auto-horizontal-center">
                     <div class="circle" id="tuneCircle">
                         <div class="note"><span id="note">--</span></div>
                     </div>
                 </div>
 
-                <div class="col-md-4 my-auto-horizontal-center">
+                <div class="col my-auto-horizontal-center">
                     <div id="detector" class="vague">
                         <div id="detune">
                             <span id="detune_amt">0</span>
