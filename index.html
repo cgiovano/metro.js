@@ -20,23 +20,6 @@
         height: 100%;
     }
 
-    .navbar {
-        height: 10%;
-    }
-
-    .tabcontent {
-        display: flex;
-        height: 90%;
-    }
-
-    .containter {
-        vertical-align: middle;
-    }
-
-    .row {
-        margin: 0;
-    }
-
     .my-auto-vertical-center {
         margin-top: auto;
         margin-bottom: auto;
@@ -83,6 +66,32 @@
     #tempo-marking-display {
         font-style: italic;
     }
+
+    .navbar {
+        height: 10%;
+        position: sticky;
+        min-height: 4em;
+    }
+
+    .tabcontent {
+        position: fixed;
+        width: 100%;
+        height: inherit;
+        display: flex;
+    }
+
+    .containter {
+        vertical-align: middle;
+    }
+
+    .circle {
+        border-style: solid;
+        border-color: black;
+        border-radius: 50%;
+        height: 10rem;
+        width: 10rem;
+    }
+
 </style>
 
 <body>
@@ -101,7 +110,7 @@
 
     <div id="metrojs" class="tabcontent">
         <div class="container">
-            <div class="row" id="1">
+            <div class="row custom-padding" id="1">
                 <div class="col text-center">
                     <div class="common-ui-text custom-padding">beats per bar:</div>
                     <div class="row justify-content-center" id="beats-per-bar-selection">
@@ -129,11 +138,10 @@
                     <div class="row justify-content-center">
                         <span class="text" id="bpm-text">BPM</span>
                     </div>
+                    <div class="row justify-content-center">
+                        <span class="text" id="tempo-marking-display">tempo</span>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row my-auto-bottom-align my-custom-text-align-right custom-padding">
-                <span class="text" id="tempo-marking-display">tempo</span>
             </div>
 
             <div class="row justify-content-center custom-padding" id="2">
@@ -149,19 +157,19 @@
 
     <div id="tunerjs" class="tabcontent">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 my-auto-horizontal-center">
+            <div class="row justify-content-center">
+                <div class="col-md-4 my-auto-vertical-center my-auto-vertical-center">
                     <div class="pitch content"><span id="pitch">0Hz</span>Hz</div>
                 </div>
 
-                <div class="col my-auto-horizontal-center">
-                    <div class="circle" id="tuneCircle">
-                        <div class="note"><span id="note">--</span></div>
+                <div class="col my-auto-horizontal-center my-auto-vertical-center">
+                    <div class="circle my-auto-vertical-center" id="tuneCircle">
+                        <div class="note my-auto-vertical-center"><span id="note">--</span></div>
                     </div>
                 </div>
 
-                <div class="col my-auto-horizontal-center">
-                    <div id="detector" class="vague">
+                <div class="col my-auto-horizontal-center my-auto-vertical-center">
+                    <div id="detector" class="vague my-auto-vertical-center">
                         <div id="detune">
                             <span id="detune_amt">0</span>
                             <span id="flat">cents &#9837;</span>
